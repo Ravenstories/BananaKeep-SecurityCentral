@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BananaKeep-SecurityCentral", "BananaKeep-SecurityCentral\BananaKeep-SecurityCentral.csproj", "{FEB11D8D-C133-4526-951A-507156350218}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FEB11D8D-C133-4526-951A-507156350218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEB11D8D-C133-4526-951A-507156350218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEB11D8D-C133-4526-951A-507156350218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEB11D8D-C133-4526-951A-507156350218}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ACEE7B4C-281C-4F8E-B3E0-30D0A23CA8C0}
+	EndGlobalSection
+EndGlobal
