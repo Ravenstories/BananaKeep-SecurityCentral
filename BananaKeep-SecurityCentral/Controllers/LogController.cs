@@ -4,19 +4,9 @@ namespace BananaKeep_SecurityCentral.Controllers
 {
     public class LogController : Controller
     {
-        public IActionResult Index()
-        {
-            var logFilePath = "Logs/console.log"; // Path to the log file
-            if (System.IO.File.Exists(logFilePath))
-            {
-                var logContent = System.IO.File.ReadAllText(logFilePath);
-                return View("LogView", logContent);
-            }
-            return View("LogView", "Log file not found.");
-        }
         public IActionResult LogView()
         {
-            var logFilePath = "Logs/console.log"; // Path to the log file
+            var logFilePath = "console.log"; // Path to the log file
             if (System.IO.File.Exists(logFilePath))
             {
                 var logContent = System.IO.File.ReadAllText(logFilePath);
