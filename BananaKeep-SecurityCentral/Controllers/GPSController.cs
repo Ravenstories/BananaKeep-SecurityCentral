@@ -15,14 +15,13 @@ namespace BananaKeep_SecurityCentral.Controllers
         {
             try
             {
-                // Validate GPS data received
-                if (gpsData == null || gpsData.Latitude < -90 || gpsData.Latitude > 90 ||
-                    gpsData.Longitude < -180 || gpsData.Longitude > 180)
-                {
-                    return BadRequest("Invalid GPS data");
-                }
+                //Log the GPS data received
+                Console.WriteLine("GPS data received: " + gpsData);
 
-                // ADD CODE HERE TO GO TO VERIFICATION CONTROLLER
+                // Verify the GPS data received
+                var verificationController = new VerificationController();
+                verificationController.VerifyGPSData(gpsData);
+
 
                 return Ok(200);
             }
