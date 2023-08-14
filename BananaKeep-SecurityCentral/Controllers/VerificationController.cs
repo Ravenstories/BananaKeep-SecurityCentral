@@ -30,6 +30,7 @@ namespace BananaKeep_SecurityCentral.Controllers
             Console.WriteLine("GPSUnits: " + gpsUnit);
 
             // Check if GPS unit is active
+            //Do we save the location if inactive?
             if (!gpsUnit.Active)
             {
                 Console.WriteLine("GPS unit is not active");
