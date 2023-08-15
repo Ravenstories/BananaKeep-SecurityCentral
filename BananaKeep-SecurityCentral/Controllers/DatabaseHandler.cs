@@ -12,7 +12,7 @@ namespace BananaKeep_SecurityCentral.Controllers
         //USE DUMMYDATABASE FOR TESTING
         
 
-        public void SaveGPSData(GPSData gpsData)
+        public void SaveGPSData(GPSUnit gpsData)
         {
             //Save GPSData to Database
             DummyDatabase.SaveGPSData(gpsData);
@@ -20,14 +20,14 @@ namespace BananaKeep_SecurityCentral.Controllers
         }
         public void UpdateGPSData() { }
         public void DeleteGPSData() { }
-        public List<GPSData> GetAllGPSUnitData() 
+        public List<GPSUnit> GetAllGPSUnitData() 
         {
             //Get all GPSUnits from DummyDatabase
             var gpsUnits = DummyDatabase.GetAllGPSUnits();
             //Return all GPSUnits
             return gpsUnits;
         }
-        public GPSData GetSingleGPSUnitData(int id) 
+        public GPSUnit GetSingleGPSUnitData(int id) 
         {
             //Get single GPSUnit from DummyDatabase
             Console.WriteLine("GPSUnit ID: " + id);

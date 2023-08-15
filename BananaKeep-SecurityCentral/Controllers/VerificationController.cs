@@ -11,7 +11,7 @@ namespace BananaKeep_SecurityCentral.Controllers
 
         }
 
-        public void VerifyGPSData(GPSData gpsData)
+        public void VerifyGPSData(GPSUnit gpsData)
         {
             // Validate GPS data received
             if (gpsData == null || gpsData.Latitude < -90 || gpsData.Latitude > 90 ||

@@ -24,7 +24,7 @@ namespace BananaKeep_SecurityCentral.Controllers
                 }
 
                 // Deserialize the JSON data into a GPSData object using Newtonsoft.Json
-                GPSData gpsData = JsonConvert.DeserializeObject<GPSData>(requestBody);
+                GPSUnit gpsData = JsonConvert.DeserializeObject<GPSUnit>(requestBody);
 
                 //Console.WriteLine("GPSData: " + gpsData);
                 
