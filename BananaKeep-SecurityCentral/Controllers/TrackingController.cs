@@ -17,7 +17,7 @@
 
             //Get the distance between the two GPSUnits
             var distance = DistanceInKmBetweenEarthCoordinates(gpsUnit1.Latitude, gpsUnit1.Longitude, gpsUnit2.Latitude, gpsUnit2.Longitude);
-            Console.WriteLine("Distance: ", distance);
+            Console.WriteLine($"Distance: {distance} Km");
 
             //If the distance is greater than 0.5 km, send an alert
             if (distance > 0.5)
@@ -31,7 +31,6 @@
         {
             return degrees * Math.PI / 180;
         }
-
         public static double DistanceInKmBetweenEarthCoordinates(double lat1, double lon1, double lat2, double lon2)
         {
             double earthRadiusKm = 6371;
