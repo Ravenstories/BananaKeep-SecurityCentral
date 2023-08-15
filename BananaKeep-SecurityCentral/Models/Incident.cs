@@ -6,6 +6,6 @@
         public bool Dismissed { get; set; }
         public DateTime TriggeredTimestamp { get; set; }
         public GPSUnit GPSUnit { get; set; }
-        public List<IncidentLog> logs { get; set; }
+        public List<IncidentLog> Logs { get; set; }
     }
 }
