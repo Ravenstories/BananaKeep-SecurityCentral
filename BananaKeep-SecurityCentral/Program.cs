@@ -1,5 +1,10 @@
 using BananaKeep_SecurityCentral.Controllers;
 using BananaKeep_SecurityCentral.DBSubstitute;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(); 
@@ -10,7 +15,6 @@ app.MapControllers(); // Map controllers from GPSController and other controller
 //Initialize the database
 DummyDatabase.Initialize();
 
-app.Run();
+app.MapGet("/", () => "SYSTEM IS RUNNING"); // Default route
 
-Console.WriteLine("Hello World!");
-Console.WriteLine("Testing MVC LogView");
+app.Run();
