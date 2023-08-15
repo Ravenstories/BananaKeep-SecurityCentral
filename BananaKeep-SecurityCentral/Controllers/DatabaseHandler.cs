@@ -14,6 +14,8 @@ namespace BananaKeep_SecurityCentral.Controllers
 
         public void SaveGPSData(GPSData gpsData)
         {
+            //Save GPSData to Database
+            DummyDatabase.SaveGPSData(gpsData);
 
         }
         public void UpdateGPSData() { }

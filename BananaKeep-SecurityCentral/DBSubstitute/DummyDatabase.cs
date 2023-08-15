@@ -29,7 +29,30 @@ namespace BananaKeep_SecurityCentral.DBSubstitute
         {
            return _gpsUnits.FirstOrDefault(gpsUnit => gpsUnit.Id == id);
         }
+        //save GPS data
+        public static void SaveGPSData(GPSData gpsData)
+        {
+            //Check if id exists
+            var gpsUnit = GetGPSUnitById(gpsData.Id);
+            if (gpsUnit == null)
+            {
+                throw new Exception("GPS unit does not exist");
+            }
+            else
+            {
+                //Add GPS data to GPS unit list
+                try
+                {
+                    _gpsUnits.Remove(gpsUnit);
+                    _gpsUnits.Add(gpsData);
+                    Console.WriteLine("GPS data saved.");
+                    
+                }
+                catch { Console.WriteLine("Couldn't save new gps data for: ", gpsUnit.Id); }
+            }
+
+        }
     }
-    
+
 
 }
