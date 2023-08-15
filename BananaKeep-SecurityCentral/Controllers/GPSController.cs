@@ -1,6 +1,7 @@
 ﻿using System;
 using BananaKeep_SecurityCentral.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace BananaKeep_SecurityCentral.Controllers
 {
@@ -11,17 +12,25 @@ namespace BananaKeep_SecurityCentral.Controllers
     public class GPSController : ControllerBase
     {
         [HttpPost("gps-data")]
-        public IActionResult ReceiveGPSData(GPSData gpsData)
+        public async Task<IActionResult> ReceiveGPSDataAsync()
         {
             try
             {
-                //Log the GPS data received
-                Console.WriteLine("GPS data received: " + gpsData);
+                // Read the JSON payload from the request body
+                string requestBody = string.Empty;
+                using (var reader = new StreamReader(Request.Body))
+                {
+                    requestBody = await reader.ReadToEndAsync();
+                }
 
+                // Deserialize the JSON data into a GPSData object using Newtonsoft.Json
+                GPSData gpsData = JsonConvert.DeserializeObject<GPSData>(requestBody);
+
+                Console.WriteLine("GPSData: " + gpsData);
+                
                 // Verify the GPS data received
                 var verificationController = new VerificationController();
                 verificationController.VerifyGPSData(gpsData);
-
 
                 return Ok(200);
             }

@@ -12,9 +12,10 @@ builder.Services.AddControllers();
 var app = builder.Build();
 app.MapControllers(); // Map controllers from GPSController and other controllers
 
+app.MapGet("/", () => "SYSTEM IS RUNNING"); // Default route
+
 //Initialize the database
 DummyDatabase.Initialize();
 
-app.MapGet("/", () => "SYSTEM IS RUNNING"); // Default route
-
 app.Run();
+

@@ -26,8 +26,9 @@ namespace BananaKeep_SecurityCentral.Controllers
             return gpsUnits;
         }
         public GPSData GetSingleGPSUnitData(int id) 
-        { 
+        {
             //Get single GPSUnit from DummyDatabase
+            Console.WriteLine("GPSUnit ID: " + id);
             var gpsUnit = DummyDatabase.GetGPSUnitById(id);
             //Return single GPSUnit
             return gpsUnit;

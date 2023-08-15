@@ -25,7 +25,9 @@ namespace BananaKeep_SecurityCentral.Controllers
             //Get all GPSUnits from DatabaseHandler (DummyDatabase) - Redundant
             //var gpsUnits = databaseHandler.GetAllGPSUnitData();
             //Get single GPSUnit from DatabaseHandler (DummyDatabase)
+            
             var gpsUnit = databaseHandler.GetSingleGPSUnitData(gpsData.Id);
+
 
             Console.WriteLine("GPSUnits: " + gpsUnit);
 

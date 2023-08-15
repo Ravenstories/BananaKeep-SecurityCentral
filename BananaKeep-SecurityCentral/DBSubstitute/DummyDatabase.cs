@@ -17,6 +17,7 @@ namespace BananaKeep_SecurityCentral.DBSubstitute
                 new GPSData { Id = 5, Latitude = 29.7604, Longitude = -95.3698, Timestamp = DateTime.Now.AddHours(-4), Active = false, Altitude = 1500},
                 // Add more GPS units here
             };
+            Console.WriteLine(_gpsUnits.Count + " GPS units added to the database.");
         }
         //return all GPS units
         public static List<GPSData> GetAllGPSUnits()
