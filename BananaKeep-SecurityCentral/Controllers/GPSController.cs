@@ -32,6 +32,8 @@ namespace BananaKeep_SecurityCentral.Controllers
                 var verificationController = new VerificationController();
                 verificationController.VerifyGPSData(gpsData);
 
+                TrackingController.TrackGPSData();
+
                 return Ok(200);
             }
             catch (Exception ex)
