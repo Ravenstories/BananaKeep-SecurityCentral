@@ -5,12 +5,7 @@ namespace BananaKeep_SecurityCentral.Controllers
 {
     public class DatabaseHandler
     {
-        public DatabaseHandler()
-        {
-
-        }
         //USE DUMMYDATABASE FOR TESTING
-        
 
         public void SaveGPSData(GPSUnit gpsData)
         {
