@@ -3,6 +3,6 @@
     public class ToolBoxGPSUnit
     {
         public GPSUnit GPSUnit { get; set; }
-        public int DepositoryID { get; set; }
+        public int DepositoryGPSUnitID { get; set; }
     }
 }

@@ -26,7 +26,7 @@ namespace BananaKeep_SecurityCentral.Controllers
                 // Deserialize the JSON data into a GPSData object using Newtonsoft.Json
                 GPSUnit gpsData = JsonConvert.DeserializeObject<GPSUnit>(requestBody);
 
-                //Console.WriteLine("GPSData: " + gpsData);
+                Console.WriteLine("GPSData: " + gpsData.ToString());
                 
                 // Verify the GPS data received
                 var verificationController = new VerificationController();

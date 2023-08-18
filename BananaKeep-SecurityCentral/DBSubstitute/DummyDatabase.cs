@@ -40,19 +40,19 @@ namespace BananaKeep_SecurityCentral.DBSubstitute
 
             _toolBoxGPSUnits = new List<ToolBoxGPSUnit>
             {
-                new ToolBoxGPSUnit { GPSUnit = _gpsUnits[0], DepositoryID = 1 },
-                new ToolBoxGPSUnit { GPSUnit = _gpsUnits[1], DepositoryID = 1 },
-                new ToolBoxGPSUnit { GPSUnit = _gpsUnits[3], DepositoryID = 1 },
-                new ToolBoxGPSUnit { GPSUnit = _gpsUnits[4], DepositoryID = 2 },
-                new ToolBoxGPSUnit { GPSUnit = _gpsUnits[5], DepositoryID = 2 },
-                new ToolBoxGPSUnit { GPSUnit = _gpsUnits[8], DepositoryID = 3 }
+                new ToolBoxGPSUnit { GPSUnit = _gpsUnits[0], DepositoryGPSUnitID = 3 },
+                new ToolBoxGPSUnit { GPSUnit = _gpsUnits[1], DepositoryGPSUnitID = 3 },
+                new ToolBoxGPSUnit { GPSUnit = _gpsUnits[3], DepositoryGPSUnitID = 3 },
+                new ToolBoxGPSUnit { GPSUnit = _gpsUnits[4], DepositoryGPSUnitID = 7 },
+                new ToolBoxGPSUnit { GPSUnit = _gpsUnits[5], DepositoryGPSUnitID = 7 },
+                new ToolBoxGPSUnit { GPSUnit = _gpsUnits[8], DepositoryGPSUnitID = 8 }
             };
 
             _depositories = new List<Depository>
             {
                 new Depository
                 {
-                    ID=1, GPSUnit = _gpsUnits[2], IncidentTriggerRadiusMeters=200, LicensePlate="1234-ABC",
+                    GPSUnit = _gpsUnits[2], IncidentTriggerRadiusMeters=200, LicensePlate="1234-ABC",
                     ToolBoxGPSUnits = new List<ToolBoxGPSUnit>
                     {
                         _toolBoxGPSUnits[0],
@@ -62,7 +62,7 @@ namespace BananaKeep_SecurityCentral.DBSubstitute
                 },
                 new Depository
                 {
-                    ID=2, GPSUnit = _gpsUnits[6], IncidentTriggerRadiusMeters=200, LicensePlate="1234-ABC",
+                    GPSUnit = _gpsUnits[6], IncidentTriggerRadiusMeters=200, LicensePlate="1234-ABC",
                     ToolBoxGPSUnits = new List<ToolBoxGPSUnit>
                     {
                         _toolBoxGPSUnits[2],
@@ -72,7 +72,7 @@ namespace BananaKeep_SecurityCentral.DBSubstitute
                 },
                 new Depository
                 {
-                    ID=3, GPSUnit = _gpsUnits[7], IncidentTriggerRadiusMeters=200, LicensePlate="1234-ABC",
+                    GPSUnit = _gpsUnits[7], IncidentTriggerRadiusMeters=200, LicensePlate="1234-ABC",
                     ToolBoxGPSUnits = new List<ToolBoxGPSUnit>
                     {
                         _toolBoxGPSUnits[4]

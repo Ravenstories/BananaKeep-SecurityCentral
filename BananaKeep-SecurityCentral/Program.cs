@@ -6,10 +6,23 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+string policyName = "_OpenEndPoints";
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers(); 
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: policyName, builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
+app.UseCors(policyName);
+app.UseHttpsRedirection();
+app.UseAuthorization();
 app.MapControllers(); // Map controllers from GPSController and other controllers
 
 app.MapGet("/", () => "SYSTEM IS RUNNING"); // Default route
