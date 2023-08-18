@@ -9,18 +9,18 @@
 
   <ItemGroup>
     <Compile Remove="Logs\**" />
+    <Compile Remove="View\**" />
     <Content Remove="Logs\**" />
+    <Content Remove="View\**" />
     <EmbeddedResource Remove="Logs\**" />
+    <EmbeddedResource Remove="View\**" />
     <None Remove="Logs\**" />
+    <None Remove="View\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="View\" />
   </ItemGroup>
 
 </Project>
