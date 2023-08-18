@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.SignalR;
 namespace BananaKeep_SecurityCentral.Controllers
 {
     [ApiController]
-    [Route("/[controller]")]
+    [Route("/ws/[controller]")]
     public class IncidentController : ControllerBase
     {
         private readonly IHubContext<IncidentHub> hub;
@@ -26,9 +26,9 @@ namespace BananaKeep_SecurityCentral.Controllers
                 timer.SetTimer(
                     () => hub.Clients.All.SendAsync(
                         "TransferIncidentData", 
-                        DatabaseHandler.GetRelevantIncidents(1) // TODO: Legitimately acquire user_id
+                        DatabaseHandler.GetRelevantIncidents(1) // TODO: Legitimately acquire user_id from GET request
                         ));
-            return Ok(new { Message = "Request Completed" });
+            return Ok(new { Message = "Request Completed"});
         }
     }
 }
