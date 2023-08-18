@@ -25,15 +25,15 @@ namespace BananaKeep_SecurityCentral.DBSubstitute
 
             _gpsUnits = new List<GPSUnit>
             {
-                new GPSUnit { ID = 1, Latitude = 37.7749, Longitude = -122.4194, Timestamp = DateTime.Now, Active = true, Altitude = 1500 }, // Tool D1
-                new GPSUnit { ID = 2, Latitude = 40.7128, Longitude = -74.0060, Timestamp = DateTime.Now.AddHours(-1), Active = true, Altitude = 1500}, // tool D1
-                new GPSUnit { ID = 3, Latitude = 41.8781, Longitude = -87.6298, Timestamp = DateTime.Now.AddHours(-2), Active = true, Altitude = 1500}, // Depository 1 - Torben Tools
-                new GPSUnit { ID = 4, Latitude = 34.0522, Longitude = -118.2437, Timestamp = DateTime.Now.AddHours(-3), Active = false, Altitude = 1500}, // tool D1
-                new GPSUnit { ID = 5, Latitude = 29.7604, Longitude = -95.3698, Timestamp = DateTime.Now.AddHours(-4), Active = false, Altitude = 1500}, // tool D2
-                new GPSUnit { ID = 6, Latitude = 39.7604, Longitude = -85.3698, Timestamp = DateTime.Now.AddMinutes(-4), Active = true, Altitude = 1500}, // tool D2
-                new GPSUnit { ID = 7, Latitude = 49.7604, Longitude = -75.3698, Timestamp = DateTime.Now.AddSeconds(-4), Active = true, Altitude = 1500}, // Depository 2 - Torben Tools
-                new GPSUnit { ID = 8, Latitude = 59.7604, Longitude = -65.3698, Timestamp = DateTime.Now.AddDays(-1), Active = true, Altitude = 1500}, // Depository 3 - Monkey Business
-                new GPSUnit { ID = 9, Latitude = 69.7604, Longitude = -55.3698, Timestamp = DateTime.Now.AddYears(-1), Active = true, Altitude = 1500}, // tool D3
+                new GPSUnit { ID = 1, Name="Torben's Tobenet Venstrehånds Undergrebet Bøje Sav", Latitude = 37.7749, Longitude = -122.4194, Timestamp = DateTime.Now, Active = true, Altitude = 1500 }, // Tool D1
+                new GPSUnit { ID = 2, Name="Torben's Torbulator", Latitude = 40.7128, Longitude = -74.0060, Timestamp = DateTime.Now.AddHours(-1), Active = true, Altitude = 1500}, // tool D1
+                new GPSUnit { ID = 3, Name="Torben's Vogn", Latitude = 41.8781, Longitude = -87.6298, Timestamp = DateTime.Now.AddHours(-2), Active = true, Altitude = 1500}, // Depository 1 - Torben Tools
+                new GPSUnit { ID = 4, Name="Torben's Boremaskine", Latitude = 34.0522, Longitude = -118.2437, Timestamp = DateTime.Now.AddHours(-3), Active = false, Altitude = 1500}, // tool D1
+                new GPSUnit { ID = 5, Name="Svend's Automassager", Latitude = 29.7604, Longitude = -95.3698, Timestamp = DateTime.Now.AddHours(-4), Active = false, Altitude = 1500}, // tool D2
+                new GPSUnit { ID = 6, Name="Svend's Svensknøgle", Latitude = 39.7604, Longitude = -85.3698, Timestamp = DateTime.Now.AddMinutes(-4), Active = true, Altitude = 1500}, // tool D2
+                new GPSUnit { ID = 7, Name="Svend's Vogn", Latitude = 49.7604, Longitude = -75.3698, Timestamp = DateTime.Now.AddSeconds(-4), Active = true, Altitude = 1500}, // Depository 2 - Torben Tools
+                new GPSUnit { ID = 8, Name="Banana Fleet Vehicle 1", Latitude = 59.7604, Longitude = -65.3698, Timestamp = DateTime.Now.AddDays(-1), Active = true, Altitude = 1500}, // Depository 3 - Monkey Business
+                new GPSUnit { ID = 9,  Name="Monkey Stick Box", Latitude = 69.7604, Longitude = -55.3698, Timestamp = DateTime.Now.AddYears(-1), Active = true, Altitude = 1500}, // tool D3
                 
                 // Add more GPS units here
             };
@@ -142,9 +142,11 @@ namespace BananaKeep_SecurityCentral.DBSubstitute
                 }
                 catch { Console.WriteLine("Couldn't save new gps data for: ", gpsUnit.ID); }
             }
+        }
 
+        public static List<Incident> GetIncidents()
+        {
+            return _incidents;
         }
     }
-
-
 }

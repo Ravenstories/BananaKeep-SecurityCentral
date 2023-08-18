@@ -1,5 +1,6 @@
 ﻿using BananaKeep_SecurityCentral.DBSubstitute;
 using BananaKeep_SecurityCentral.Models;
+using System.Runtime.CompilerServices;
 
 namespace BananaKeep_SecurityCentral.Controllers
 {
@@ -31,5 +32,11 @@ namespace BananaKeep_SecurityCentral.Controllers
             return gpsUnit;
         }
 
+        public static List<Incident> GetRelevantIncidents(int userID)
+        {
+            List<Incident> incidents = DummyDatabase.GetIncidents();
+
+            return incidents;
+        }
     }
 }
