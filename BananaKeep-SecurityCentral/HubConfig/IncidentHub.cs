@@ -6,7 +6,7 @@ namespace BananaKeep_SecurityCentral.HubConfig
 {
     public class IncidentHub : Hub
     {
-        public async Task BroadcastChartData(List<Incident> data) =>
-            await Clients.All.SendAsync("broadcastincidents", data);
+        public async Task BroadcastIncidentData(List<Incident> data) =>
+            await Clients.All.SendAsync("broadcastincidentdata", data);
     }
 }
