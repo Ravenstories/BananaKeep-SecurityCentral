@@ -20,7 +20,7 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
-app.UseCors(policyName);
+app.UseCors(policyName); // UseCors MUST be before UseAuthorization
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers(); // Map controllers from GPSController and other controllers
