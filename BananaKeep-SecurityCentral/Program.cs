@@ -32,7 +32,7 @@ app.UseAuthorization();
 app.MapControllers(); // Map controllers from GPSController and other controllers
 
 app.MapHub<IncidentHub>("/incident");
-app.MapGet("/", () => "SYSTEM IS RUNNING"); // Default route
+app.MapGet("/", () => GPSController.ConnectionLog); // Default route
 
 //Initialize the database
 DummyDatabase.Initialize();

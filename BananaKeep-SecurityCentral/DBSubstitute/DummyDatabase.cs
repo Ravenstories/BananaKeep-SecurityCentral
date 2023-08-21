@@ -33,7 +33,7 @@ namespace BananaKeep_SecurityCentral.DBSubstitute
                 new GPSUnit { ID = 6, Name="Svend's Svensknøgle", Latitude = 39.7604, Longitude = -85.3698, Timestamp = DateTime.Now.AddMinutes(-4), Active = true, Altitude = 1500}, // tool D2
                 new GPSUnit { ID = 7, Name="Svend's Vogn", Latitude = 49.7604, Longitude = -75.3698, Timestamp = DateTime.Now.AddSeconds(-4), Active = true, Altitude = 1500}, // Depository 2 - Torben Tools
                 new GPSUnit { ID = 8, Name="Banana Fleet Vehicle 1", Latitude = 59.7604, Longitude = -65.3698, Timestamp = DateTime.Now.AddDays(-1), Active = true, Altitude = 1500}, // Depository 3 - Monkey Business
-                new GPSUnit { ID = 9,  Name="Monkey Stick Box", Latitude = 69.7604, Longitude = -55.3698, Timestamp = DateTime.Now.AddYears(-1), Active = true, Altitude = 1500}, // tool D3
+                new GPSUnit { ID = 9, Name="Monkey Stick Box", Latitude = 69.7604, Longitude = -55.3698, Timestamp = DateTime.Now.AddYears(-1), Active = true, Altitude = 1500}, // tool D3
                 
                 // Add more GPS units here
             };
@@ -147,6 +147,16 @@ namespace BananaKeep_SecurityCentral.DBSubstitute
         public static List<Incident> GetIncidents()
         {
             return _incidents;
+        }
+
+        public static List<Depository> GetDepositories()
+        {
+            return _depositories;
+        }
+
+        public static List<ToolBoxGPSUnit> GetToolBoxGPSUnits()
+        {
+            return _toolBoxGPSUnits;
         }
     }
 }

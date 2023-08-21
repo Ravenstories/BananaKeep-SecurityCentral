@@ -32,11 +32,46 @@ namespace BananaKeep_SecurityCentral.Controllers
             return gpsUnit;
         }
 
+        public static List<ToolBoxGPSUnit> GetDepositoryToolBoxGPSUnits(int depositoryGPSUnitID) 
+        { 
+            return DummyDatabase.GetToolBoxGPSUnits().FindAll(t => t.DepositoryGPSUnitID == depositoryGPSUnitID);
+        }
+
         public static List<Incident> GetRelevantIncidents(int userID)
         {
-            List<Incident> incidents = DummyDatabase.GetIncidents();
+            List<Incident> userIncidents = new List<Incident>();
 
-            return incidents;
+            // First we find all the depositories belonging to the user
+            List<Depository> depositories = DummyDatabase.GetDepositories().FindAll(d => d.User.ID == userID);
+
+
+
+            // Then we check and see, if there are any ongoing incidents for the Depositories (in the case of a stolen van), or any of the tools therein.
+            List<Incident> incidents = DummyDatabase.GetIncidents();
+            foreach (Incident inc in incidents)
+            {
+                foreach (Depository de in depositories)
+                {
+                    if (de.GPSUnit.ID == inc.GPSUnit.ID)
+                    {
+                        userIncidents.Add(inc); 
+                        break;
+                    }
+                    else
+                    {
+                        foreach (ToolBoxGPSUnit toolBox in de.ToolBoxGPSUnits)
+                        {
+                            if (inc.GPSUnit.ID == toolBox.GPSUnit.ID)
+                            {
+                                userIncidents.Add(inc);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return userIncidents;
         }
     }
 }

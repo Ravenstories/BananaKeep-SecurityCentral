@@ -11,6 +11,8 @@ namespace BananaKeep_SecurityCentral.Controllers
     // This controller is used to receive GPS data
     public class GPSController : ControllerBase
     {
+        public static string ConnectionLog = "IT WORKS :)))\n";
+
         [HttpPost("gps-data")]
         public async Task<IActionResult> ReceiveGPSDataAsync()
         {
@@ -22,6 +24,8 @@ namespace BananaKeep_SecurityCentral.Controllers
                 {
                     requestBody = await reader.ReadToEndAsync();
                 }
+
+                ConnectionLog += "\nNew Request:\n" + requestBody;
 
                 // Deserialize the JSON data into a GPSData object using Newtonsoft.Json
                 GPSUnit gpsData = JsonConvert.DeserializeObject<GPSUnit>(requestBody);
