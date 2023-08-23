@@ -11,7 +11,7 @@ namespace BananaKeep_SecurityCentral.Controllers
 
         }
 
-        public void VerifyGPSData(GPSUnit gpsData)
+        public bool VerifyGPSData(GPSUnit gpsData)
         {
             // Validate GPS data received
             if (gpsData == null || gpsData.Latitude < -90 || gpsData.Latitude > 90 ||
@@ -21,13 +21,9 @@ namespace BananaKeep_SecurityCentral.Controllers
             }
 
             //Use DatabaseHandler to fetch all GPSUnits
-            var databaseHandler = new DatabaseHandler();
-            //Get all GPSUnits from DatabaseHandler (DummyDatabase) - Redundant
-            //var gpsUnits = databaseHandler.GetAllGPSUnitData();
-            //Get single GPSUnit from DatabaseHandler (DummyDatabase)
+            DatabaseHandler databaseHandler = new DatabaseHandler();
             
-            var gpsUnit = databaseHandler.GetSingleGPSUnitData(gpsData.ID);
-
+            GPSUnit gpsUnit = databaseHandler.GetSingleGPSUnitData(gpsData.ID);
 
             Console.WriteLine("GPSUnits: " + gpsUnit);
 
@@ -41,6 +37,7 @@ namespace BananaKeep_SecurityCentral.Controllers
                 Console.WriteLine("GPS unit is active");
                 databaseHandler.SaveGPSData(gpsData);
             }
+            return gpsUnit.Active;
         }
     }
 }

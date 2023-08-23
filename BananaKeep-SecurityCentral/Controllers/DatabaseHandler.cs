@@ -8,10 +8,12 @@ namespace BananaKeep_SecurityCentral.Controllers
     {
         //USE DUMMYDATABASE FOR TESTING
 
+        private static DummyDatabase db = new DummyDatabase();
+
         public void SaveGPSData(GPSUnit gpsData)
         {
             //Save GPSData to Database
-            DummyDatabase.SaveGPSData(gpsData);
+            db.SaveGPSData(gpsData);
 
         }
         public void UpdateGPSData() { }
@@ -27,51 +29,24 @@ namespace BananaKeep_SecurityCentral.Controllers
         {
             //Get single GPSUnit from DummyDatabase
             Console.WriteLine("GPSUnit ID: " + id);
-            var gpsUnit = DummyDatabase.GetGPSUnitById(id);
+            var gpsUnit = db.GetGPSUnitById(id);
             //Return single GPSUnit
             return gpsUnit;
         }
 
         public static List<ToolBoxGPSUnit> GetDepositoryToolBoxGPSUnits(int depositoryGPSUnitID) 
         { 
-            return DummyDatabase.GetToolBoxGPSUnits().FindAll(t => t.DepositoryGPSUnitID == depositoryGPSUnitID);
+            return db.GetToolBoxGPSUnits().FindAll(t => t.DepositoryGPSUnitID == depositoryGPSUnitID);
         }
 
-        public static List<Incident> GetRelevantIncidents(int userID)
+        public List<Incident> GetGPSUnitIncidents(int unitID)
         {
-            List<Incident> userIncidents = new List<Incident>();
+            return db.GetIncidents().FindAll(i => i.GPSUnitID == unitID);
+        }
 
-            // First we find all the depositories belonging to the user
-            List<Depository> depositories = DummyDatabase.GetDepositories().FindAll(d => d.User.ID == userID);
-
-
-
-            // Then we check and see, if there are any ongoing incidents for the Depositories (in the case of a stolen van), or any of the tools therein.
-            List<Incident> incidents = DummyDatabase.GetIncidents();
-            foreach (Incident inc in incidents)
-            {
-                foreach (Depository de in depositories)
-                {
-                    if (de.GPSUnit.ID == inc.GPSUnit.ID)
-                    {
-                        userIncidents.Add(inc); 
-                        break;
-                    }
-                    else
-                    {
-                        foreach (ToolBoxGPSUnit toolBox in de.ToolBoxGPSUnits)
-                        {
-                            if (inc.GPSUnit.ID == toolBox.GPSUnit.ID)
-                            {
-                                userIncidents.Add(inc);
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-
-            return userIncidents;
+        public static List<Incident> GetUserIncidents(int userID)
+        {
+            return DummyDatabase.GetUserIncidents(userID);
         }
     }
 }

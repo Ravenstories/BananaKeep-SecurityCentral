@@ -2,6 +2,7 @@
 using BananaKeep_SecurityCentral.HubConfig;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using BananaKeep_SecurityCentral.Models;
 
 namespace BananaKeep_SecurityCentral.Controllers
 {
@@ -26,9 +27,10 @@ namespace BananaKeep_SecurityCentral.Controllers
                 timer.SetTimer(
                     () => hub.Clients.All.SendAsync(
                         "TransferIncidentData", 
-                        DatabaseHandler.GetRelevantIncidents(1) // TODO: Legitimately acquire user_id from GET request
+                        DatabaseHandler.GetUserIncidents(1) // TODO: Legitimately acquire user_id from GET request, and only send to the right client
                         ));
             return Ok(new { Message = "Request Completed"});
         }
+        
     }
 }

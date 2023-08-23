@@ -1,13 +1,17 @@
-﻿namespace BananaKeep_SecurityCentral.Controllers
+﻿using BananaKeep_SecurityCentral.Models;
+
+namespace BananaKeep_SecurityCentral.Controllers
 {
     public class TrackingController
     {
         //Compare data from Database to see if the units are too far apart
 
-        public static void TrackGPSData()
+        private static DatabaseHandler databaseHandler = new DatabaseHandler();
+
+        public static void TrackToolBoxGPSUnit(ToolBoxGPSUnit unit)
         {
             //Get all GPSUnits from DatabaseHandler
-            DatabaseHandler databaseHandler = new DatabaseHandler();
+            
             var gpsUnits = databaseHandler.GetAllGPSUnitData();
 
             //Get the first GPSUnit
@@ -25,6 +29,30 @@
                 Console.WriteLine("ALERT: GPS units are too far apart");
             }
 
+        }
+
+        public bool HasUnitCurrentIncident(GPSUnit unit)
+        {
+            List<Incident> _is = databaseHandler.GetGPSUnitIncidents(unit.ID);
+
+            foreach (Incident i in _is)
+            {
+                if (i.Dismissed is null)
+                {
+                    // If dismissed is null, then it means that the user has yet to specify whether there is an incident or not, so we will for now assume it is the case.
+                    return true;
+                }
+                else
+                {
+                    bool dismissed = i.Dismissed == true;
+                    // One might be tempted to "return !dismissed", but we must check the remaining incidents in _is
+                    if (!dismissed)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         public static double DegreesToRadians(double degrees)

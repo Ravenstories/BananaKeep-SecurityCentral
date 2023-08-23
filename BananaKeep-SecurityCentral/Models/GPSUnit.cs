@@ -1,6 +1,6 @@
 ﻿namespace BananaKeep_SecurityCentral.Models
 { 
-    public class GPSUnit
+    public abstract class GPSUnit
     {
         // GPSData class is used to store the GPS data received from the GPS module.
         public int ID { get; set; }

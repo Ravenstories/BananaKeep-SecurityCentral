@@ -9,5 +9,7 @@
         public string PhoneNumber { get; set; }
         public int CompanyCVR { get; set; }
         public List<Depository> Depositories { get; set; }
+
+        public List<Incident> Incidents { get; set; }
     }
 }

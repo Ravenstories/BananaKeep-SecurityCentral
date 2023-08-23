@@ -1,8 +1,7 @@
 ﻿namespace BananaKeep_SecurityCentral.Models
 {
-    public class ToolBoxGPSUnit
+    public class ToolBoxGPSUnit : GPSUnit
     {
-        public GPSUnit GPSUnit { get; set; }
         public int DepositoryGPSUnitID { get; set; }
     }
 }
