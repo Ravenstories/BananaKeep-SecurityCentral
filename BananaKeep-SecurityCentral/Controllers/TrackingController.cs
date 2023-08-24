@@ -8,6 +8,24 @@ namespace BananaKeep_SecurityCentral.Controllers
 
         private static DatabaseHandler databaseHandler = new DatabaseHandler();
 
+        public void ProcessGPSData(GPSUnit gpsData)
+        {
+            // Check if there is an incident with this unit
+            if (HasUnitCurrentIncident(gpsData))
+            {
+                // As there is currently an incident, we must log this datapoint
+                IncidentLog log = new IncidentLog();
+            }
+            else
+            {
+                // If not, then find out what Kind it is.
+
+
+                // IF it does not have an incident, and is a toolbox gps unit... We must check its relative position to its Depository.
+                TrackToolBoxGPSUnit();
+            }
+        }
+
         public static void TrackToolBoxGPSUnit(ToolBoxGPSUnit unit)
         {
             //Get all GPSUnits from DatabaseHandler
@@ -31,7 +49,7 @@ namespace BananaKeep_SecurityCentral.Controllers
 
         }
 
-        public bool HasUnitCurrentIncident(GPSUnit unit)
+        private bool HasUnitCurrentIncident(GPSUnit unit)
         {
             List<Incident> _is = databaseHandler.GetGPSUnitIncidents(unit.ID);
 

@@ -11,6 +11,8 @@ namespace BananaKeep_SecurityCentral.Controllers
 
         }
 
+        DatabaseHandler databaseHandler = new DatabaseHandler();
+
         public bool VerifyGPSData(GPSUnit gpsData)
         {
             // Validate GPS data received
@@ -21,10 +23,7 @@ namespace BananaKeep_SecurityCentral.Controllers
             }
 
             //Use DatabaseHandler to fetch all GPSUnits
-            DatabaseHandler databaseHandler = new DatabaseHandler();
-            
             GPSUnit gpsUnit = databaseHandler.GetSingleGPSUnitData(gpsData.ID);
-
             Console.WriteLine("GPSUnits: " + gpsUnit);
 
             // Check if GPS unit is active

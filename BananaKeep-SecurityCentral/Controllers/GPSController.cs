@@ -14,6 +14,10 @@ namespace BananaKeep_SecurityCentral.Controllers
         public static string ConnectionLog = "IT WORKS :)))\n";
         public static int ConnectionLogNumber = 1;
 
+        VerificationController verificationController = new VerificationController();
+        TrackingController trackingController = new TrackingController();
+
+
         [HttpPost("gps-data")]
         public async Task<IActionResult> ReceiveGPSDataAsync()
         {
@@ -32,26 +36,11 @@ namespace BananaKeep_SecurityCentral.Controllers
                 // Deserialize the JSON data into a GPSData object using Newtonsoft.Json
                 GPSUnit gpsData = JsonConvert.DeserializeObject<GPSUnit>(requestBody);
 
-                
+
                 // Verify the GPS data received and save to database if verified
-                var verificationController = new VerificationController();
                 if (verificationController.VerifyGPSData(gpsData))
                 {
-                    // Check if there is an incident with this unit
-                    TrackingController trackingController = new TrackingController();
-                    if (trackingController.HasUnitCurrentIncident(gpsData))
-                    {
-                        // As there is currently an incident, we must log this datapoint
-                        IncidentLog log = new IncidentLog();
-                    } 
-                    else
-                    {
-                        // If not, then find out what Kind it is.
-
-
-                        // IF it does not have an incident, and is a toolbox gps unit... We must check its relative position to its Depository.
-                        trackingController.TrackToolBoxGPSUnit();
-                    }
+                    trackingController.ProcessGPSData(gpsData);
                 }
 
                 return Ok(200);
