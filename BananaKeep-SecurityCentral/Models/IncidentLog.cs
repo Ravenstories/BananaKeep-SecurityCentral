@@ -4,8 +4,8 @@
     {
         public int IncidentID { get; set; }
         public DateTime Timestamp { get; set; }
-        public int Longitude { get; set; }
-        public int Latitude { get; set; }
-        public int Altitude { get; set; }
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
+        public double Altitude { get; set; }
     }
 }

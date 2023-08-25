@@ -4,14 +4,17 @@ namespace BananaKeep_SecurityCentral.DBSubstitute
 {
     public class DummyDatabase
     {
-        private static List<User> _users;
-        private static List<GPSUnit> _gpsUnits;
-        private static List<Depository> _depositories;
-        private static List<ToolBoxGPSUnit> _toolBoxGPSUnits;
-        private static List<Incident> _incidents;
+        private List<User> _users;
+        private List<GPSUnit> _gpsUnits;
+        private List<Depository> _depositories;
+        private List<ToolBoxGPSUnit> _toolBoxGPSUnits;
+        private List<Incident> _incidents;
 
-
-        public static void Initialize()
+        public DummyDatabase()
+        {
+            Initialize();
+        }
+        private void Initialize()
         {
             _users = new List<User>
             {
@@ -27,12 +30,12 @@ namespace BananaKeep_SecurityCentral.DBSubstitute
             {
                 new ToolBoxGPSUnit { ID = 1, Name="Torben's Tobenet Venstrehånds Undergrebet Bøje Sav", DepositoryGPSUnitID = 3, Latitude = 37.7749, Longitude = -122.4194, Timestamp = DateTime.Now, Active = true, Altitude = 1500 }, // Tool D1
                 new ToolBoxGPSUnit { ID = 2, Name="Torben's Torbulator", DepositoryGPSUnitID = 3, Latitude = 40.7128, Longitude = -74.0060, Timestamp = DateTime.Now.AddHours(-1), Active = true, Altitude = 1500}, // tool D1
-                new Depository { ID = 3, Name="Torben's Vogn", IncidentTriggerRadiusMeters=200, LicensePlate="1234-ABC", UserID = 1, Latitude = 41.8781, Longitude = -87.6298, Timestamp = DateTime.Now.AddHours(-2), Active = true, Altitude = 1500}, // Depository 1 - Torben Tools
+                new Depository { ID = 3, Name="Torben's Vogn", IncidentTriggerRadiusMeters=200, LicensePlate="1234-ABC", UserID = 1, Latitude = 41.8781, Longitude = -87.6298, Timestamp = DateTime.Now.AddHours(-2), Active = true, Altitude = 1500, ToolBoxGPSUnits = new List<ToolBoxGPSUnit>()}, // Depository 1 - Torben Tools
                 new ToolBoxGPSUnit { ID = 4, Name="Torben's Boremaskine", DepositoryGPSUnitID = 3, Latitude = 34.0522, Longitude = -118.2437, Timestamp = DateTime.Now.AddHours(-3), Active = false, Altitude = 1500}, // tool D1
                 new ToolBoxGPSUnit { ID = 5, Name="Svend's Automassager", DepositoryGPSUnitID = 7, Latitude = 29.7604, Longitude = -95.3698, Timestamp = DateTime.Now.AddHours(-4), Active = false, Altitude = 1500}, // tool D2
                 new ToolBoxGPSUnit { ID = 6, Name="Svend's Svensknøgle", DepositoryGPSUnitID = 7, Latitude = 39.7604, Longitude = -85.3698, Timestamp = DateTime.Now.AddMinutes(-4), Active = true, Altitude = 1500}, // tool D2
-                new Depository { ID = 7, Name="Svend's Vogn", IncidentTriggerRadiusMeters=200, LicensePlate="1234-ABC", UserID = 2, Latitude = 49.7604, Longitude = -75.3698, Timestamp = DateTime.Now.AddSeconds(-4), Active = true, Altitude = 1500}, // Depository 2 - Torben Tools
-                new Depository { ID = 8, Name="Banana Fleet Vehicle 1", IncidentTriggerRadiusMeters=200, LicensePlate="1234-ABC", UserID = 3, Latitude = 59.7604, Longitude = -65.3698, Timestamp = DateTime.Now.AddDays(-1), Active = true, Altitude = 1500}, // Depository 3 - Monkey Business
+                new Depository { ID = 7, Name="Svend's Vogn", IncidentTriggerRadiusMeters=200, LicensePlate="1234-ABC", UserID = 2, Latitude = 49.7604, Longitude = -75.3698, Timestamp = DateTime.Now.AddSeconds(-4), Active = true, Altitude = 1500, ToolBoxGPSUnits = new List<ToolBoxGPSUnit>()}, // Depository 2 - Torben Tools
+                new Depository { ID = 8, Name="Banana Fleet Vehicle 1", IncidentTriggerRadiusMeters=200, LicensePlate="1234-ABC", UserID = 3, Latitude = 59.7604, Longitude = -65.3698, Timestamp = DateTime.Now.AddDays(-1), Active = true, Altitude = 1500, ToolBoxGPSUnits = new List<ToolBoxGPSUnit>()}, // Depository 3 - Monkey Business
                 new ToolBoxGPSUnit { ID = 9, Name="Stix's Sticky Box of Sticky Stick Stickers", DepositoryGPSUnitID = 8, Latitude = 69.7604, Longitude = -55.3698, Timestamp = DateTime.Now.AddYears(-1), Active = true, Altitude = 1500}, // tool D3
                 
                 // Add more GPS units here
@@ -110,7 +113,7 @@ namespace BananaKeep_SecurityCentral.DBSubstitute
             Console.WriteLine(_gpsUnits.Count + " GPS units added to the database.");
         }
 
-        public static List<Incident> GetUserIncidents(int userID)
+        public List<Incident> GetUserIncidents(int userID)
         {
             List<Incident> userIncidents = new List<Incident>();
 
@@ -146,7 +149,7 @@ namespace BananaKeep_SecurityCentral.DBSubstitute
         }
 
         //return all GPS units
-        public static List<GPSUnit> GetAllGPSUnits()
+        public List<GPSUnit> GetAllGPSUnits()
         {
             return _gpsUnits;
         }
@@ -155,6 +158,12 @@ namespace BananaKeep_SecurityCentral.DBSubstitute
         {
            return _gpsUnits.FirstOrDefault(gpsUnit => gpsUnit.ID == id);
         }
+        
+        public List<User> GetUsers()
+        {
+            return _users;
+        }
+
         //save GPS data
         public void SaveGPSData(GPSUnit gpsData)
         {
@@ -200,6 +209,16 @@ namespace BananaKeep_SecurityCentral.DBSubstitute
         public List<ToolBoxGPSUnit> GetToolBoxGPSUnits()
         {
             return _toolBoxGPSUnits;
+        }
+
+        public void CreateIncidentLogEntry(IncidentLog entry, int incidentID)
+        {
+            _incidents.First(i => i.ID == incidentID).Logs.Add(entry);
+        }
+        public void CreateIncident(Incident incident, User user)
+        {
+            _incidents.Add(incident);
+            user.Incidents.Add(incident);
         }
     }
 }

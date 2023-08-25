@@ -6,12 +6,12 @@ namespace BananaKeep_SecurityCentral.Controllers
 {
     public class VerificationController
     {
-        public VerificationController()
+        private DatabaseHandler databaseHandler;
+
+        public VerificationController(DatabaseHandler _databaseHandler)
         {
-
+            this.databaseHandler = _databaseHandler;
         }
-
-        DatabaseHandler databaseHandler = new DatabaseHandler();
 
         public bool VerifyGPSData(GPSUnit gpsData)
         {
@@ -24,10 +24,9 @@ namespace BananaKeep_SecurityCentral.Controllers
 
             //Use DatabaseHandler to fetch all GPSUnits
             GPSUnit gpsUnit = databaseHandler.GetSingleGPSUnitData(gpsData.ID);
-            Console.WriteLine("GPSUnits: " + gpsUnit);
+            Console.WriteLine("GPSUnits: " + gpsUnit.Name);
 
             // Check if GPS unit is active
-            //Do we save the location if inactive?
             if (!gpsUnit.Active)
             {
                 Console.WriteLine("GPS unit is not active");

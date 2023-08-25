@@ -34,8 +34,8 @@ app.MapControllers(); // Map controllers from GPSController and other controller
 app.MapHub<IncidentHub>("/incident");
 app.MapGet("/", () => GPSController.ConnectionLog); // Default route
 
-//Initialize the database
-DummyDatabase.Initialize();
+
+Main.Initialize();
 
 app.Run();
 

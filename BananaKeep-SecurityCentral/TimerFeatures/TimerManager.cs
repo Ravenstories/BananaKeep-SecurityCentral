@@ -13,7 +13,12 @@ namespace BananaKeep_SecurityCentral.TimerFeatures
         {
             this.action = _action;
             resetEvent = new AutoResetEvent(false);
-            timer = new Timer(Execute, resetEvent, 1000, 2000);
+            timer = new Timer(
+                Execute, // Function to execute at every interval
+                resetEvent, // Automatically reset the event if ended
+                1000, // Initial delay
+                5000 // Interval rate
+                );
             StartedTime = DateTime.Now;
             IsTimerStarted = true;
         }

@@ -14,8 +14,8 @@ namespace BananaKeep_SecurityCentral.Controllers
         public static string ConnectionLog = "IT WORKS :)))\n";
         public static int ConnectionLogNumber = 1;
 
-        VerificationController verificationController = new VerificationController();
-        TrackingController trackingController = new TrackingController();
+        VerificationController verificationController = Main.Home.VerificationController;
+        TrackingController trackingController = Main.Home.TrackingController;
 
 
         [HttpPost("gps-data")]
@@ -41,9 +41,10 @@ namespace BananaKeep_SecurityCentral.Controllers
                 if (verificationController.VerifyGPSData(gpsData))
                 {
                     trackingController.ProcessGPSData(gpsData);
+                    return Ok(200);
                 }
 
-                return Ok(200);
+                return BadRequest(400);
             }
             catch (Exception ex)
             {

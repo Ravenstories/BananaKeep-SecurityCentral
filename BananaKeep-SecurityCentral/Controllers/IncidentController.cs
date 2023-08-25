@@ -12,6 +12,7 @@ namespace BananaKeep_SecurityCentral.Controllers
     {
         private readonly IHubContext<IncidentHub> hub;
         private readonly TimerManager timer;
+        private DatabaseHandler databaseHandler = Main.Home.DatabaseHandler;
 
         public IncidentController(IHubContext<IncidentHub> _hub, TimerManager _timer)
         {
@@ -27,7 +28,7 @@ namespace BananaKeep_SecurityCentral.Controllers
                 timer.SetTimer(
                     () => hub.Clients.All.SendAsync(
                         "TransferIncidentData", 
-                        DatabaseHandler.GetUserIncidents(1) // TODO: Legitimately acquire user_id from GET request, and only send to the right client
+                        databaseHandler.GetIncidents().Find(i => i.Dismissed is null)
                         ));
             return Ok(new { Message = "Request Completed"});
         }

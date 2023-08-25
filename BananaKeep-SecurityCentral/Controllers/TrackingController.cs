@@ -6,47 +6,51 @@ namespace BananaKeep_SecurityCentral.Controllers
     {
         //Compare data from Database to see if the units are too far apart
 
-        private static DatabaseHandler databaseHandler = new DatabaseHandler();
+        private DatabaseHandler databaseHandler;
+
+        public TrackingController(DatabaseHandler dbh)
+        {
+            databaseHandler = dbh;
+        }
 
         public void ProcessGPSData(GPSUnit gpsData)
         {
             // Check if there is an incident with this unit
             if (HasUnitCurrentIncident(gpsData))
             {
-                // As there is currently an incident, we must log this datapoint
-                IncidentLog log = new IncidentLog();
+                databaseHandler.CreateIncidentLogEntry(gpsData);
             }
             else
             {
                 // If not, then find out what Kind it is.
-
+                GPSUnit unit = databaseHandler.GetSingleGPSUnitData(gpsData.ID);
 
                 // IF it does not have an incident, and is a toolbox gps unit... We must check its relative position to its Depository.
-                TrackToolBoxGPSUnit();
+                if (unit is ToolBoxGPSUnit)
+                {
+                    TrackToolBoxGPSUnit((ToolBoxGPSUnit)unit);
+                }
             }
         }
 
-        public static void TrackToolBoxGPSUnit(ToolBoxGPSUnit unit)
+        private void TrackToolBoxGPSUnit(ToolBoxGPSUnit unit)
         {
             //Get all GPSUnits from DatabaseHandler
             
-            var gpsUnits = databaseHandler.GetAllGPSUnitData();
-
-            //Get the first GPSUnit
-            var gpsUnit1 = gpsUnits[0];
-            //Get the second GPSUnit
-            var gpsUnit2 = gpsUnits[1];
+            Depository depo = (Depository)databaseHandler.GetSingleGPSUnitData(unit.DepositoryGPSUnitID);
 
             //Get the distance between the two GPSUnits
-            var distance = DistanceInKmBetweenEarthCoordinates(gpsUnit1.Latitude, gpsUnit1.Longitude, gpsUnit2.Latitude, gpsUnit2.Longitude);
+            var distance = DistanceInKmBetweenEarthCoordinates(unit.Latitude, unit.Longitude, depo.Latitude, depo.Longitude);
             Console.WriteLine($"Distance: {distance} Km");
 
-            //If the distance is greater than 0.5 km, send an alert
-            if (distance > 0.5)
+            //If the distance is greater than 
+            if (distance > (depo.IncidentTriggerRadiusMeters * 0.001))
             {
                 Console.WriteLine("ALERT: GPS units are too far apart");
-            }
 
+                // Create New incident!
+                databaseHandler.CreateIncident(unit, depo.UserID);
+            }
         }
 
         private bool HasUnitCurrentIncident(GPSUnit unit)
@@ -55,29 +59,20 @@ namespace BananaKeep_SecurityCentral.Controllers
 
             foreach (Incident i in _is)
             {
-                if (i.Dismissed is null)
+                if (i.Dismissed != true) // "nullable-bool != true" allows for Null
                 {
                     // If dismissed is null, then it means that the user has yet to specify whether there is an incident or not, so we will for now assume it is the case.
                     return true;
-                }
-                else
-                {
-                    bool dismissed = i.Dismissed == true;
-                    // One might be tempted to "return !dismissed", but we must check the remaining incidents in _is
-                    if (!dismissed)
-                    {
-                        return true;
-                    }
                 }
             }
             return false;
         }
 
-        public static double DegreesToRadians(double degrees)
+        private double DegreesToRadians(double degrees)
         {
             return degrees * Math.PI / 180;
         }
-        public static double DistanceInKmBetweenEarthCoordinates(double lat1, double lon1, double lat2, double lon2)
+        private double DistanceInKmBetweenEarthCoordinates(double lat1, double lon1, double lat2, double lon2)
         {
             double earthRadiusKm = 6371;
 
