@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BananaKeep-SecurityCentral", "BananaKeep-SecurityCentral\BananaKeep-SecurityCentral.csproj", "{FEB11D8D-C133-4526-951A-507156350218}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BananaKeep-UnitTest", "BananaKeep-UnitTest\BananaKeep-UnitTest.csproj", "{3C03F32B-E401-4943-A3EF-B0ADDA6AE51F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FEB11D8D-C133-4526-951A-507156350218}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEB11D8D-C133-4526-951A-507156350218}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEB11D8D-C133-4526-951A-507156350218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C03F32B-E401-4943-A3EF-B0ADDA6AE51F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C03F32B-E401-4943-A3EF-B0ADDA6AE51F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C03F32B-E401-4943-A3EF-B0ADDA6AE51F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C03F32B-E401-4943-A3EF-B0ADDA6AE51F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

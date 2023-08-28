@@ -25,7 +25,7 @@ namespace BananaKeep_SecurityCentral.Controllers
                 // If not, then find out what Kind it is.
                 GPSUnit unit = databaseHandler.GetSingleGPSUnitData(gpsData.ID);
 
-                // IF it does not have an incident, and is a toolbox gps unit... We must check its relative position to its Depository.
+                // If it is a toolbox gps unit... We must check its relative position to its Depository.
                 if (unit is ToolBoxGPSUnit)
                 {
                     TrackToolBoxGPSUnit((ToolBoxGPSUnit)unit);
