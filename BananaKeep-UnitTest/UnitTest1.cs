@@ -13,6 +13,8 @@ namespace BananaKeep_UnitTest
     {
         private const string URL = "http://localhost:5257/api/gps/gps-data";
         private string urlParameters = "";
+
+
         public class DataObject
         {
             public string Name { get; set; }
@@ -53,25 +55,18 @@ namespace BananaKeep_UnitTest
             gPSUnit.ID = 3;
 
             // List data response.
-            HttpResponseMessage response = client.PostAsJsonAsync(urlParameters, gPSUnit).Result; // client.GetAsync(urlParameters).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
-            /*
-            if (response.IsSuccessStatusCode)
-            {
-                // Parse the response body.
-                var dataObjects = response.Content.ReadAsAsync<IEnumerable<DataObject>>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
-                foreach (var d in dataObjects)
-                {
-                    Console.WriteLine("{0}", d.Name);
-                }
-            }
-            else
-            {
-                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-            }
-            */
+            HttpResponseMessage response = client.PostAsJsonAsync(urlParameters, gPSUnit).Result; // Blocking call! Program will wait here until a response is received or a timeout occurs.
             Assert.IsTrue(response.IsSuccessStatusCode);
 
-            // Make any other calls using HttpClient here.
+            gPSUnit.Longitude = 950634;
+            response = client.PostAsJsonAsync(urlParameters, gPSUnit).Result;
+            Assert.IsTrue(!response.IsSuccessStatusCode);
+
+            gPSUnit.Longitude = 75;
+            gPSUnit.ID = 99;
+            response = client.PostAsJsonAsync(urlParameters, gPSUnit).Result;
+            Assert.IsTrue(!response.IsSuccessStatusCode);
+
 
             // Dispose once all HttpClient calls are complete. This is not necessary if the containing object will be disposed of; for example in this case the HttpClient instance will be disposed automatically when the application terminates so the following call is superfluous.
             client.Dispose();

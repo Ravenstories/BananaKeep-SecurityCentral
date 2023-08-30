@@ -24,6 +24,10 @@ namespace BananaKeep_SecurityCentral.Controllers
 
             //Use DatabaseHandler to fetch all GPSUnits
             GPSUnit gpsUnit = databaseHandler.GetSingleGPSUnitData(gpsData.ID);
+            if (gpsUnit == null)
+            {
+                throw new Exception("Unrecognized GPS Unit");
+            }
             Console.WriteLine("GPSUnits: " + gpsUnit.Name);
 
             // Check if GPS unit is active
