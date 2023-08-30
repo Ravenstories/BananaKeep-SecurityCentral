@@ -24,7 +24,7 @@ namespace BananaKeep_SecurityCentral.Controllers
             try
             {
                 // Read the JSON payload from the request body
-                string requestBody = string.Empty;
+                string requestBody;
                 using (var reader = new StreamReader(Request.Body))
                 {
                     requestBody = await reader.ReadToEndAsync();
@@ -41,10 +41,10 @@ namespace BananaKeep_SecurityCentral.Controllers
                 if (verificationController.VerifyGPSData(gpsData))
                 {
                     trackingController.ProcessGPSData(gpsData);
-                    return Ok(200);
+                    return Ok("Success");
                 }
 
-                return BadRequest(400);
+                return BadRequest("Impossible GPSData");
             }
             catch (Exception ex)
             {

@@ -44,7 +44,7 @@ namespace BananaKeep_SecurityCentral.DBSubstitute
             _incidents = new List<Incident>
             {
                 new Incident {
-                    ID=1, Dismissed=false, GPSUnitID=1, TriggeredTimestamp=DateTime.Now.AddMinutes(-24942), Logs = new List<IncidentLog>
+                    ID=1, Dismissed=true, GPSUnitID=1, TriggeredTimestamp=DateTime.Now.AddMinutes(-24942), Logs = new List<IncidentLog>
                     {
                         new IncidentLog { IncidentID=1, Longitude=60, Latitude=60, Altitude= 1500, Timestamp= DateTime.Now },
                         new IncidentLog { IncidentID=1, Longitude=61, Latitude=59, Altitude= 1500, Timestamp= DateTime.Now.AddSeconds(-5) },

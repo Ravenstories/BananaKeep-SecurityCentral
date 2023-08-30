@@ -17,7 +17,7 @@ namespace BananaKeep_SecurityCentral.TimerFeatures
                 Execute, // Function to execute at every interval
                 resetEvent, // Automatically reset the event if ended
                 1000, // Initial delay
-                5000 // Interval rate
+                1500 // Interval rate
                 );
             StartedTime = DateTime.Now;
             IsTimerStarted = true;

@@ -26,12 +26,12 @@ namespace BananaKeep_SecurityCentral.Controllers
             if (!timer.IsTimerStarted)
 
                 timer.SetTimer(
+                    // When the timer hits an interval, it will send the following to all clients
                     () => hub.Clients.All.SendAsync(
-                        "TransferIncidentData", 
-                        databaseHandler.GetIncidents().Find(i => i.Dismissed is null)
+                        "TransferIncidentData", // package name
+                        databaseHandler.GetIncidents().FindAll(i => i.Dismissed is null) // The package itself. All unanswered Incidents.
                         ));
             return Ok(new { Message = "Request Completed"});
         }
-        
     }
 }
