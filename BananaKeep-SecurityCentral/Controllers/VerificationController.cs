@@ -33,7 +33,6 @@ namespace BananaKeep_SecurityCentral.Controllers
             }else
             {
                 Console.WriteLine("GPS unit is active");
-                databaseHandler.SaveGPSData(gpsData);
             }
             return gpsUnit.Active;
         }

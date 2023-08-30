@@ -37,9 +37,10 @@ namespace BananaKeep_SecurityCentral.Controllers
                 GPSUnit gpsData = JsonConvert.DeserializeObject<GPSUnit>(requestBody);
 
 
-                // Verify the GPS data received and save to database if verified
+                // Verify the GPS data received
                 if (verificationController.VerifyGPSData(gpsData))
                 {
+                    // Save the data, and do the required checks if to see if there's an incident ongoing.
                     trackingController.ProcessGPSData(gpsData);
                     return Ok("Success");
                 }

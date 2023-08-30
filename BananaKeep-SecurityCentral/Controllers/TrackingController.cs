@@ -15,6 +15,8 @@ namespace BananaKeep_SecurityCentral.Controllers
 
         public void ProcessGPSData(GPSUnit gpsData)
         {
+            databaseHandler.SaveGPSData(gpsData);
+
             // Check if there is an incident with this unit
             if (HasUnitCurrentIncident(gpsData))
             {
