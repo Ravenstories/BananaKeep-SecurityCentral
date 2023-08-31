@@ -217,6 +217,7 @@ namespace BananaKeep_SecurityCentral.DBSubstitute
         }
         public void CreateIncident(Incident incident, User user)
         {
+            incident.ID = _incidents.OrderBy(i => i.ID).Last().ID + 1;
             _incidents.Add(incident);
             user.Incidents.Add(incident);
         }

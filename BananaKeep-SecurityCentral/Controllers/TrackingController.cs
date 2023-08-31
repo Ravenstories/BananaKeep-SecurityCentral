@@ -20,6 +20,7 @@ namespace BananaKeep_SecurityCentral.Controllers
             // Check if there is an incident with this unit
             if (HasUnitCurrentIncident(gpsData))
             {
+                // Whatever the GPSUnit may actually be, if it has an incident, its current position should be logged for the incident
                 databaseHandler.CreateIncidentLogEntry(gpsData);
             }
             else
@@ -32,20 +33,19 @@ namespace BananaKeep_SecurityCentral.Controllers
                 {
                     TrackToolBoxGPSUnit((ToolBoxGPSUnit)unit);
                 }
+                // If it is a depository, there is no way of knowing if it's supposed to move or not, at least with the system we have now.
             }
         }
 
         private void TrackToolBoxGPSUnit(ToolBoxGPSUnit unit)
         {
-            //Get all GPSUnits from DatabaseHandler
-            
+            // Acquire this ToolBoxGPSUnit's Depository
             Depository depo = (Depository)databaseHandler.GetSingleGPSUnitData(unit.DepositoryGPSUnitID);
 
-            //Get the distance between the two GPSUnits
+            // Get the distance between the two GPSUnits
             var distance = DistanceInKmBetweenEarthCoordinates(unit.Latitude, unit.Longitude, depo.Latitude, depo.Longitude);
-            Console.WriteLine($"Distance: {distance} Km");
 
-            //If the distance is greater than 
+            // If the distance is greater than what is specified by the depository (multiplied by 0.001 to convert to kilometers)
             if (distance > (depo.IncidentTriggerRadiusMeters * 0.001))
             {
                 Console.WriteLine("ALERT: GPS units are too far apart");
